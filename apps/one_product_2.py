@@ -25,12 +25,6 @@ layout = html.Div([
                 id='input-1',
                 options=[{'label': i, 'value': i} for i in pum_list],
                 value=pum_list[0]
-            ),
-            dcc.RadioItems(
-                id='input-2',
-                options=[{'label': i, 'value': i} for i in ['saleDate', 'Year_Month', 'saleMonth']],
-                value='Year_Month',
-                labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )
         ],
             style={'width': '49%', 'display': 'inline-block'}),
@@ -41,7 +35,17 @@ layout = html.Div([
                 value=year_list[-1]
             )
         ],
+            style={'width': '49%', 'display': 'inline-block'}),
+        html.Div([
+            dcc.RadioItems(
+                id='input-2',
+                options=[{'label': i, 'value': i} for i in ['saleDate', 'Year_Month', 'saleMonth']],
+                value='Year_Month',
+                labelStyle={'display': 'inline-block', 'marginTop': '5px'}
+            )
+        ],
             style={'width': '49%', 'display': 'inline-block'})
+        )
     ]),
 
     html.Div([
