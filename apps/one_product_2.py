@@ -20,10 +20,9 @@ time_list_en = ['saleDate', 'Year_Month', 'saleMonth']
 time_list_kr = ['일자별', '월별', '월별 합계']
 
 layout = html.Div([
-
     html.Div([
 
-        html.Div([
+       html.Div([
             html.Pre(children="품목", style={"fontSize":"150%"}),
             dcc.Dropdown(
                 id='input-1',
@@ -34,7 +33,7 @@ layout = html.Div([
             style={'width': '49%', 'display': 'inline-block'}),
 
         html.Div([
-            html.Pre(children="기간", tyle={"fontSize":"150%"}),
+            html.Pre(children="기간", style={"fontSize":"150%"}),
             dcc.Dropdown(
                 id='input-3',
                 options=[{'label': i, 'value': i} for i in year_list],
