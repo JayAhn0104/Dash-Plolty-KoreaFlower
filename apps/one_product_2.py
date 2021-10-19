@@ -33,7 +33,7 @@ layout = html.Div([
                 clearable=False,
                 persistence=True, persistence_type='session'
             )
-        ]),
+        ], className='six columns'),
 
         html.Div([
             html.Pre(children="기간", style={"fontSize":"150%"}),
@@ -44,7 +44,7 @@ layout = html.Div([
                 clearable=False,
                 persistence=True, persistence_type='session'
             )
-        ]),
+        ], className='six columns'),
 
         html.Div([
             html.Pre(children="시간 단위", style={"fontSize":"150%"}),
