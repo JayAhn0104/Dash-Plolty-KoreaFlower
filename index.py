@@ -30,7 +30,7 @@ def display_page(pathname):
     if pathname == '/apps/one_product':
         return one_product.layout
     else:
-        return "404 Page Error! Please choose a link"
+        return one_product.layout
 
 
 if __name__ == '__main__':
