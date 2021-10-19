@@ -34,7 +34,7 @@ layout = html.Div([
                 persistence=True, persistence_type='session'
             )
         ],
-            style={'width': '49%', 'display': 'inline-block'}),
+            style={'width': '35%', 'display': 'inline-block'}),
 
         html.Div([
             html.Pre(children="기간", style={"fontSize":"150%"}),
@@ -46,7 +46,7 @@ layout = html.Div([
                 persistence=True, persistence_type='session'
             )
         ],
-            style={'width': '49%', 'display': 'inline-block'}),
+            style={'width': '35%', 'display': 'inline-block'}),
 
         html.Div([
             html.Pre(children="시간 단위", style={"fontSize":"150%"}),
@@ -57,7 +57,7 @@ layout = html.Div([
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )
         ],
-            style={'width': '49%', 'display': 'inline-block'})
+            style={'width': '35%', 'display': 'inline-block'})
     ]),
 
     html.Div([
