@@ -21,7 +21,7 @@ class target_fn:
 
         return target_df.groupby(self.time_unit).sum()[['totQty', 'avgAmt', 'saleYear']].reset_index().sort_values(by=self.time_unit)
 
-    def plot_target(self, target_df, height=400, width=600):
+    def plot_target(self, target_df):
         fig = make_subplots(specs=[[{"secondary_y": True}]])
         fig.add_trace(
             go.Bar(x=target_df[self.time_unit], y=target_df['totQty'], name="totQty", marker_line_width=0),
@@ -34,8 +34,7 @@ class target_fn:
         )
         fig.update_layout(
             title_text='totQty & avgAmt of {} from {} to {} in {}'.format(self.name, target_df[self.time_unit].iloc[0],
-                                                                          target_df[self.time_unit].iloc[-1], self.year),
-            height=height, width=width
+                                                                          target_df[self.time_unit].iloc[-1], self.year)
         )
         fig.update_xaxes(title_text=self.time_unit)
         fig.update_yaxes(title_text="<b>totQty</b>", secondary_y=False)

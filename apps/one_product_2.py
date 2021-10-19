@@ -53,7 +53,7 @@ layout = html.Div([
         dcc.Graph(
             id='out-fig'
         )
-    ], style={'width': '89%', 'display': 'inline-block', 'padding': '0 20'})
+    ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'})
 ])
 
 @app.callback(
@@ -64,6 +64,6 @@ layout = html.Div([
 )
 def update_graph(name, time_unit, year):
     a = target_fn(dfg, name, time_unit, year)
-    fig = a.plot_target(a.df_target(year), width=800)
+    fig = a.plot_target(a.df_target(year))
     return fig
 
