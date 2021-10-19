@@ -16,6 +16,8 @@ dfg = pd.read_csv(DATA_PATH.joinpath("2017_2021_flower.csv"), encoding='euc-kr')
 pum_list = sorted(dfg['pumName'].unique())
 year_list = sorted(dfg['saleYear'].unique())
 year_list.append('전체기간')
+time_list_en = ['saleDate', 'Year_Month', 'saleMonth']
+time_list_kr = ['일자별', '월별', '월별 합계']
 
 layout = html.Div([
     html.Div([
@@ -41,7 +43,7 @@ layout = html.Div([
         html.Div([
             dcc.RadioItems(
                 id='input-2',
-                options=[{'label': i, 'value': i} for i in ['saleDate', 'Year_Month', 'saleMonth']],
+                options=[{'label': time_list_kr[i], 'value': time_list_en[i]} for i in range(0, len(time_list_en))],
                 value='Year_Month',
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )

@@ -33,8 +33,8 @@ class target_fn:
             secondary_y=True
         )
         fig.update_layout(
-            title_text='totQty & avgAmt of {} from {} to {} in {}'.format(self.name, target_df[self.time_unit].iloc[0],
-                                                                          target_df[self.time_unit].iloc[-1], self.year)
+            title_text='totQty & avgAmt of {} from {} to {}'.format(self.name, target_df[self.time_unit].iloc[0],
+                                                                          target_df[self.time_unit].iloc[-1])
         )
         fig.update_xaxes(title_text=self.time_unit)
         fig.update_yaxes(title_text="<b>totQty</b>", secondary_y=False)
