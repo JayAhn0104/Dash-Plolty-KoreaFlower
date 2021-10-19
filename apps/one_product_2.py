@@ -20,7 +20,6 @@ time_list_en = ['saleDate', 'Year_Month', 'saleMonth']
 time_list_kr = ['일자별', '월별', '월별 합계']
 
 layout = html.Div([
-    html.H1('개별 품목의 거래량 & 거래금액', style={"textAlign": "center"}),
 
     html.Div([
 
