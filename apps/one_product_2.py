@@ -23,6 +23,7 @@ layout = html.Div([
     html.Div([
 
         html.Div([
+            html.Pre(children="품목", style={"fontSize":"150%"}),
             dcc.Dropdown(
                 id='input-1',
                 options=[{'label': i, 'value': i} for i in pum_list],
@@ -32,6 +33,7 @@ layout = html.Div([
             style={'width': '49%', 'display': 'inline-block'}),
 
         html.Div([
+            html.Pre(children="기간 설", style={"fontSize":"150%"}),
             dcc.Dropdown(
                 id='input-3',
                 options=[{'label': i, 'value': i} for i in year_list],
@@ -41,6 +43,7 @@ layout = html.Div([
             style={'width': '49%', 'display': 'inline-block'}),
 
         html.Div([
+            html.Pre(children="시간 단위", style={"fontSize":"150%"}),
             dcc.RadioItems(
                 id='input-2',
                 options=[{'label': time_list_kr[i], 'value': time_list_en[i]} for i in range(0, len(time_list_en))],
