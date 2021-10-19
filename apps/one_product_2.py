@@ -29,7 +29,9 @@ layout = html.Div([
             dcc.Dropdown(
                 id='input-1',
                 options=[{'label': i, 'value': i} for i in pum_list],
-                value=pum_list[0]
+                value=pum_list[0],
+                clearable=False,
+                persistence=True, persistence_type='session'
             )
         ],
             style={'width': '49%', 'display': 'inline-block'}),
@@ -39,7 +41,9 @@ layout = html.Div([
             dcc.Dropdown(
                 id='input-3',
                 options=[{'label': i, 'value': i} for i in year_list],
-                value=year_list[-1]
+                value=year_list[-1],
+                clearable=False,
+                persistence=True, persistence_type='session'
             )
         ],
             style={'width': '49%', 'display': 'inline-block'}),
