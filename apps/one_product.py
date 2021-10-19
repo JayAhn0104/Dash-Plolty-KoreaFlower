@@ -12,42 +12,51 @@ PATH = pathlib.Path(__file__).parent
 # DATA_PATH = PATH.joinpath("../Deploy/datasets").resolve()
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 
-# owner: shivp Kaggle. Source: https://data.mendeley.com/datasets
-# dataset was modified. Original data: https://www.kaggle.com/shivkp/customer-behaviour
 dfg = pd.read_csv(DATA_PATH.joinpath("2017_2021_flower.csv"), encoding='euc-kr')
+pum_list = sorted(dfg['pumName'].unique())
+year_list = sorted(dfg['saleYear'].unique())
+year_list.append('전체기간')
 
-layout = html.Div([
-    html.H1('General Product Sales', style={"textAlign": "center"}),
+app.layout = html.Div([
+    html.Div([
+
+        html.Div([
+            dcc.Dropdown(
+                id='input-1',
+                options=[{'label': i, 'value': i} for i in pum_list],
+                value=pum_list[0]
+            ),
+            dcc.RadioItems(
+                id='input-2',
+                options=[{'label': i, 'value': i} for i in ['saleDate', 'Year_Month', 'saleMonth']],
+                value='Year_Month',
+                labelStyle={'display': 'inline-block', 'marginTop': '5px'}
+            ),
+            dcc.RadioItems(
+                id='input-3',
+                options=[{'label': i, 'value': i} for i in year_list],
+                value=year_list[-1],
+                labelStyle={'display': 'inline-block', 'marginTop': '5px'}
+            )
+        ],
+            style={'width': '49%', 'display': 'inline-block'}),
+    ]),
 
     html.Div([
-        html.Div([
-            html.Pre(children="Payment type", style={"fontSize":"150%"}),
-            dcc.Dropdown(
-                id='pymnt-dropdown', value='카랑코에', clearable=False,
-                persistence=True, persistence_type='session',
-                options=[{'label': x, 'value': x} for x in sorted(dfg["pumName"].unique())]
-            )
-        ], className='six columns'),
-
-        html.Div([
-            html.Pre(children="Country of destination", style={"fontSize": "150%"}),
-            dcc.RadioItems(
-                id='country-dropdown', value='Year_Month',
-                persistence=True, persistence_type='local',
-                options=[{'label': x, 'value': x} for x in ['saleDate', 'saleMonth', 'Year_Month']]
-            )
-        ], className='six columns'),
-    ], className='row'),
-
-    dcc.Graph(id='my-map', figure={}),
+        dcc.Graph(
+            id='out-fig'
+        )
+    ], style={'width': '89%', 'display': 'inline-block', 'padding': '0 20'})
 ])
 
 @app.callback(
-    Output(component_id='my-map', component_property='figure'),
-    [Input(component_id='pymnt-dropdown', component_property='value'),
-     Input(component_id='country-dropdown', component_property='value')]
+    Output(component_id='out-fig', component_property='figure'),
+    [Input(component_id='input-1', component_property='value'),
+     Input(component_id='input-2', component_property='value'),
+     Input(component_id='input-3', component_property='value')]
 )
-def update_graph(name, time_unit):
-    a = target_fn(dfg, name, time_unit, year='whole_range')
-    fig = a.plot_target(a.df_target(), width=800)
+def update_graph(name, time_unit, year):
+    a = target_fn(dfg, name, time_unit, year)
+    fig = a.plot_target(a.df_target(year), width=800)
     return fig
+

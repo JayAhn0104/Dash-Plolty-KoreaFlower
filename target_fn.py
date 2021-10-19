@@ -9,14 +9,14 @@ class target_fn:
         self.time_unit = time_unit
         self.year = year
 
-    def df_target(self):
-        if self.year == 'whole_range':
-            target_df = self.df[self.df['pumName']==self.name]
-            date_df = pd.DataFrame({self.time_unit:self.df[self.time_unit].unique()})
+    def df_target(self, year):
+        if isinstance(year, int):
+            target_df = self.df[(self.df['pumName']==self.name)&(self.df['saleYear']==year)]
+            date_df = pd.DataFrame({self.time_unit:self.df[self.df['saleYear']==year][self.time_unit].unique()})
             target_df = pd.merge(date_df, target_df, on=self.time_unit, how='outer')
         else:
-            target_df = self.df[(self.df['pumName']==self.name)&(self.df['saleYear']==self.year)]
-            date_df = pd.DataFrame({self.time_unit:self.df[self.df['saleYear']==self.year][self.time_unit].unique()})
+            target_df = self.df[self.df['pumName']==self.name]
+            date_df = pd.DataFrame({self.time_unit:self.df[self.time_unit].unique()})
             target_df = pd.merge(date_df, target_df, on=self.time_unit, how='outer')
 
         return target_df.groupby(self.time_unit).sum()[['totQty', 'avgAmt', 'saleYear']].reset_index().sort_values(by=self.time_unit)
