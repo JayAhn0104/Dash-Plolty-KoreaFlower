@@ -17,7 +17,7 @@ pum_list = sorted(dfg['pumName'].unique())
 year_list = sorted(dfg['saleYear'].unique())
 year_list.append('전체기간')
 
-app.layout = html.Div([
+layout = html.Div([
     html.Div([
 
         html.Div([
