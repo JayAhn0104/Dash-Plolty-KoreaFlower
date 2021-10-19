@@ -28,6 +28,7 @@ layout = html.Div([
             )
         ],
             style={'width': '49%', 'display': 'inline-block'}),
+
         html.Div([
             dcc.Dropdown(
                 id='input-3',
@@ -36,6 +37,7 @@ layout = html.Div([
             )
         ],
             style={'width': '49%', 'display': 'inline-block'}),
+
         html.Div([
             dcc.RadioItems(
                 id='input-2',
@@ -45,7 +47,6 @@ layout = html.Div([
             )
         ],
             style={'width': '49%', 'display': 'inline-block'})
-        )
     ]),
 
     html.Div([
