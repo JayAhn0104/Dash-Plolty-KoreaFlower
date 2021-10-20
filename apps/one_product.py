@@ -58,14 +58,14 @@ layout = html.Div([
 
     html.Div([
         dcc.Graph(
-            id='out-fig'
+            id='out-fig-one'
         )
     ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'})
 
 ])
 
 @app.callback(
-    Output(component_id='out-fig', component_property='figure'),
+    Output(component_id='out-fig-one', component_property='figure'),
     [Input(component_id='input-1', component_property='value'),
      Input(component_id='input-2', component_property='value'),
      Input(component_id='input-3', component_property='value')]

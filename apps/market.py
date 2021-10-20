@@ -56,14 +56,14 @@ layout = html.Div([
 
     html.Div([
         dcc.Graph(
-            id='out-fig'
+            id='out-fig-market'
         )
     ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'})
 
 ])
 
 @app.callback(
-    Output(component_id='out-fig', component_property='figure'),
+    Output(component_id='out-fig-market', component_property='figure'),
     [Input(component_id='input-1', component_property='value')]
 )
 def update_graph(time_unit):
