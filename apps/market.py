@@ -4,15 +4,14 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import pathlib
 from app import app
-from target_fn import target_fn
-
+from plot_fn import target_fn
 
 # get relative data folder
 PATH = pathlib.Path(__file__).parent
 # DATA_PATH = PATH.joinpath("../Deploy/datasets").resolve()
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 
-dfg = pd.read_csv(DATA_PATH.joinpath("2017_2021_flower.csv"), encoding='euc-kr')
+dfg = pd.read_csv(DATA_PATH.joinpath("2017_2021_flower.csv"), encoding='euc-kr', index_col=0)
 pum_list = sorted(dfg['pumName'].unique())
 year_list = sorted(dfg['saleYear'].unique())
 year_list.append('전체기간')
@@ -23,7 +22,6 @@ layout = html.Div([
     html.H1('개별 품목의 거래정보', style={"textAlign": "center"}),
 
     html.Div([
-
        html.Div([
             html.Pre(children="품목", style={"fontSize":"150%"}),
             dcc.Dropdown(
@@ -54,8 +52,8 @@ layout = html.Div([
                 value='Year_Month',
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )
-        ],
-            style={'width': '35%', 'display': 'inline-block'})
+        ], style={'width': '35%', 'display': 'inline-block'})
+
     ]),
 
     html.Div([
@@ -63,6 +61,7 @@ layout = html.Div([
             id='out-fig'
         )
     ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'})
+
 ])
 
 @app.callback(
