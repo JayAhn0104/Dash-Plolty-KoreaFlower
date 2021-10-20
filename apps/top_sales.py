@@ -37,7 +37,7 @@ layout = html.Div([
         ], className='five columns'),
 
         html.Div([
-            html.Pre(children="top limit", style={"fontSize": "150%"}),
+            html.Pre(children="Top limit", style={"fontSize": "150%"}),
             dcc.Slider(
                 id='input-top-limit',
                 min=5,
@@ -45,7 +45,7 @@ layout = html.Div([
                 marks={i: 'Top {}'.format(i) for i in range(5, 31, 5)},
                 value=20
             )
-        ], className='seven columns')
+        ])
 
     ]),
 
