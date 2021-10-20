@@ -23,7 +23,7 @@ layout = html.Div([
         html.Div([
             html.Pre(children="시간 단위", style={"fontSize":"150%"}),
             dcc.RadioItems(
-                id='input-2',
+                id='input-1',
                 options=[{'label': time_list_kr[i], 'value': time_list_en[i]} for i in range(0, len(time_list_en))],
                 value='saleYear',
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
