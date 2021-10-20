@@ -41,7 +41,7 @@ layout = html.Div([
             dcc.Slider(
                 id='input-top-limit',
                 min=5,
-                max=30,
+                max=31,
                 marks={i: 'Top {}'.format(i) for i in range(5, 31, 5)},
                 value=20
             )
