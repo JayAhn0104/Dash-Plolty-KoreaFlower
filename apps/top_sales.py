@@ -34,14 +34,14 @@ layout = html.Div([
                 clearable=False,
                 persistence=True, persistence_type='session'
             )
-        ], className='six columns'),
+        ], className='five columns'),
 
         html.Div([
             html.Pre(children="top limit", style={"fontSize": "150%"}),
             dcc.Slider(
                 id='input-top-limit',
                 min=5,
-                max=31,
+                max=30,
                 marks={i: 'Top {}'.format(i) for i in range(5, 31, 5)},
                 value=20
             )
