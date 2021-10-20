@@ -37,12 +37,13 @@ layout = html.Div([
         ], className='six columns'),
 
         html.Div([
-            html.Pre(children="top-limit", style={"fontSize": "150%"}),
-            dcc.RadioItems(
+            html.Pre(children="top limit", style={"fontSize": "150%"}),
+            dcc.Slider(
                 id='input-top-limit',
-                options=[{'label': i, 'value': i} for i in [10, 20, 30, 300]],
-                value=20,
-                labelStyle={'display': 'inline-block', 'marginTop': '5px'}
+                min=5,
+                max=30,
+                step=5,
+                value=20
             )
         ], style={'width': '35%', 'display': 'inline-block'})
 
