@@ -13,7 +13,7 @@ DATA_PATH = PATH.joinpath("../datasets").resolve()
 
 df = pd.read_csv(DATA_PATH.joinpath("2017_2021_flower.csv"), encoding='euc-kr', index_col=0)
 
-year_pum_df = df.groupby(['saleYear','pumName'])[['totAmt','totQty','avgAmt']].sum()
+year_pum_df = df.groupby(['saleYear', 'pumName'])[['totAmt', 'totQty', 'avgAmt']].sum()
 year_pum_df['pumName'], year_pum_df['Year'] = None, None
 for year in year_pum_df.unstack().index:
     year_pum_df.loc[year, 'Year'] = str(year)
@@ -37,7 +37,7 @@ layout = html.Div([
             dcc.RadioItems(
                 id='input-top-limit',
                 options=[{'label': i, 'value': i} for i in [10, 20, 30, 'all']],
-                value='20',
+                value=20,
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )
         ], style={'width': '35%', 'display': 'inline-block'})
