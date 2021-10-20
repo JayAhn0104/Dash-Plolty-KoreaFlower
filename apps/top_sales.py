@@ -45,7 +45,7 @@ layout = html.Div([
                 marks={i: 'Top {}'.format(i) for i in range(5, 31, 5)},
                 value=20
             )
-        ], className='six columns')
+        ], className='seven columns')
 
     ]),
 
