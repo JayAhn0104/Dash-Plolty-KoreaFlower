@@ -42,7 +42,7 @@ layout = html.Div([
                 id='input-top-limit',
                 min=5,
                 max=30,
-                marks={i: 'Top {}'.format(i) for i in range(5, 31, 5)},
+                marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
                 value=20
             )
         ], className='six columns')
