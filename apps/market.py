@@ -4,30 +4,7 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import pathlib
 from app import app
-
-from plotly.subplots import make_subplots
-import plotly.graph_objects as go
-
-def bar_line_fn(target_df, time_unit):
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(
-        go.Bar(x=target_df[time_unit], y=target_df['totQty'], name="totQty"),
-        secondary_y=False
-    )
-    fig.add_trace(
-        go.Scatter(x=target_df[time_unit], y=target_df['avgAmt'], name="avgAmt",
-                   mode='lines'),
-        secondary_y=True
-    )
-    fig.update_layout(
-        title_text='totQty & avgAmt from {} to {}'.format(target_df[time_unit].iloc[0],
-                                                          target_df[time_unit].iloc[-1])
-    )
-    fig.update_xaxes(title_text=time_unit)
-    fig.update_yaxes(title_text="<b>totQty</b>", secondary_y=False)
-    fig.update_yaxes(title_text="<b>avgAmt</b>", secondary_y=True)
-
-    return fig
+import plot_fn as pf
 
 # get relative data folder
 PATH = pathlib.Path(__file__).parent
@@ -39,7 +16,7 @@ time_list_en = ['saleYear', 'Year_Month', 'saleMonth']
 time_list_kr = ['년도별', '월별', '월별 합계']
 
 layout = html.Div([
-    html.H1('개별 품목의 거래정보', style={"textAlign": "center"}),
+    html.H1('전체 시의 거래정보', style={"textAlign": "center"}),
 
     html.Div([
         html.Div([
@@ -68,5 +45,5 @@ layout = html.Div([
 )
 def update_graph(time_unit):
     target_df = dfg.groupby([time_unit])[['totAmt','totQty', 'avgAmt']].sum().reset_index()
-    fig = bar_line_fn(target_df, time_unit)
+    fig = pf.bar_line_fn(target_df, time_unit)
     return fig
