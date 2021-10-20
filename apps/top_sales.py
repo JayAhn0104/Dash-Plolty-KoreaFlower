@@ -49,7 +49,9 @@ for year in year_pum_df.unstack().index:
 
 layout = html.Div([
     html.H1('top sales', style={"textAlign": "center"}),
+
     html.Div([
+
         html.Div([
             html.Pre(children="변수", style={"fontSize": "150%"}),
             dcc.Dropdown(
@@ -60,11 +62,12 @@ layout = html.Div([
                 persistence=True, persistence_type='session'
             )
         ], className='six columns'),
+
         html.Div([
-            html.Pre(children="top limit", style={"fontSize": "150%"}),
+            html.Pre(children="top-limit", style={"fontSize": "150%"}),
             dcc.RadioItems(
                 id='input-top-limit',
-                options=[{'label': i, 'value': i} for i in [10, 20, 30, 'all']],
+                options=[{'label': i, 'value': i} for i in [10, 20, 30, 300]],
                 value=20,
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )
@@ -77,6 +80,7 @@ layout = html.Div([
             id='out-fig-top-bar'
         )
     ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'}),
+
 ])
 
 
