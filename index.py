@@ -7,12 +7,11 @@ from app import app
 from app import server
 
 # Connect to your app pages
-from apps import vgames, global_sales, one_product, market
+from apps import global_sales, one_product, market
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div([
-        dcc.Link('Video Games|', href='/apps/vgames'),
         dcc.Link('Other Products|', href='/apps/global_sales'),
         dcc.Link('전체 시장|', href='/apps/market'),
         dcc.Link('개별 품목', href='/apps/one_product')
@@ -24,9 +23,7 @@ app.layout = html.Div([
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    if pathname == '/apps/vgames':
-        return vgames.layout
-    elif pathname == '/apps/global_sales':
+    if pathname == '/apps/global_sales':
         return global_sales.layout
     elif pathname == '/apps/market':
         return market.layout
