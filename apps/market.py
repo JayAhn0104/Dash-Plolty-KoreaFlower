@@ -18,8 +18,6 @@ time_list_kr = ['일자별', '월별', '월별 합계']
 
 layout = html.Div([
     html.H1('개별 품목의 거래정보', style={"textAlign": "center"}),
-
-    html.Div([
         html.Div([
             html.Pre(children="시간 단위", style={"fontSize":"150%"}),
             dcc.RadioItems(
@@ -28,8 +26,7 @@ layout = html.Div([
                 value='saleYear',
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )
-        ], style={'width': '35%', 'display': 'inline-block'})
-    ]),
+        ], style={'width': '35%', 'display': 'inline-block'}),
 
     html.Div([
         dcc.Graph(
@@ -44,7 +41,7 @@ layout = html.Div([
     [Input(component_id='input-1', component_property='value')]
 )
 def update_graph(time_unit):
-    target_df = dfg.groupby([time_unit])[['totAmt','totQty', 'avgAmt']].sum().reset_index()
+    target_df = dfg.groupby([time_unit])[['totAmt','totQty','avgAmt']].sum().reset_index()
     fig = pf.bar_line_fn(target_df, time_unit)
     return fig
 
