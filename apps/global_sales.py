@@ -1,76 +1,57 @@
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import plotly.express as px
 import pandas as pd
 import pathlib
 from app import app
-import plot_fn as pf
 
 # get relative data folder
 PATH = pathlib.Path(__file__).parent
-# DATA_PATH = PATH.joinpath("../Deploy/datasets").resolve()
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 
-dfg = pd.read_csv(DATA_PATH.joinpath("2017_2021_flower.csv"), encoding='euc-kr', index_col=0)
-pum_list = sorted(dfg['pumName'].unique())
-year_list = sorted(dfg['saleYear'].unique())
-year_list.append('전체기간')
-time_list_en = ['saleDate', 'Year_Month', 'saleMonth']
-time_list_kr = ['일자별', '월별', '월별 합계']
+# owner: shivp Kaggle. Source: https://data.mendeley.com/datasets
+# dataset was modified. Original data: https://www.kaggle.com/shivkp/customer-behaviour
+dfg = pd.read_csv(DATA_PATH.joinpath("opsales.csv"))
 
 layout = html.Div([
-    html.H1('개별 품목의 거래정보', style={"textAlign": "center"}),
+    html.H1('General Product Sales', style={"textAlign": "center"}),
 
     html.Div([
         html.Div([
-            html.Pre(children="품목", style={"fontSize":"150%"}),
+            html.Pre(children="Payment type", style={"fontSize":"150%"}),
             dcc.Dropdown(
-                id='input-1',
-                options=[{'label': i, 'value': i} for i in pum_list],
-                value=pum_list[0],
-                clearable=False,
-                persistence=True, persistence_type='session'
+                id='pymnt-dropdown', value='DEBIT', clearable=False,
+                persistence=True, persistence_type='session',
+                options=[{'label': x, 'value': x} for x in sorted(dfg["Type"].unique())]
             )
         ], className='six columns'),
 
         html.Div([
-            html.Pre(children="기간", style={"fontSize":"150%"}),
+            html.Pre(children="Country of destination", style={"fontSize": "150%"}),
             dcc.Dropdown(
-                id='input-3',
-                options=[{'label': i, 'value': i} for i in year_list],
-                value=year_list[-1],
-                clearable=False,
-                persistence=True, persistence_type='session'
+                id='country-dropdown', value='India', clearable=False,
+                persistence=True, persistence_type='local',
+                options=[{'label': x, 'value': x} for x in sorted(dfg["Order Country"].unique())]
             )
         ], className='six columns'),
+    ], className='row'),
 
-        html.Div([
-            html.Pre(children="시간 단위", style={"fontSize":"150%"}),
-            dcc.RadioItems(
-                id='input-2',
-                options=[{'label': time_list_kr[i], 'value': time_list_en[i]} for i in range(0, len(time_list_en))],
-                value='Year_Month',
-                labelStyle={'display': 'inline-block', 'marginTop': '5px'}
-            )
-        ], style={'width': '35%', 'display': 'inline-block'})
-
-    ]),
-
-    html.Div([
-        dcc.Graph(
-            id='out-fig'
-        )
-    ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'})
-
+    dcc.Graph(id='my-map', figure={}),
 ])
 
+
 @app.callback(
-    Output(component_id='out-fig', component_property='figure'),
-    [Input(component_id='input-1', component_property='value'),
-     Input(component_id='input-2', component_property='value'),
-     Input(component_id='input-3', component_property='value')]
+    Output(component_id='my-map', component_property='figure'),
+    [Input(component_id='pymnt-dropdown', component_property='value'),
+     Input(component_id='country-dropdown', component_property='value')]
 )
-def update_graph(name, time_unit, year):
-    a = pf.target_fn(dfg, name, time_unit, year)
-    fig = a.plot_target(a.df_target(year))
+def display_value(pymnt_chosen, country_chosen):
+    dfg_fltrd = dfg[(dfg['Order Country'] == country_chosen) &
+                    (dfg["Type"] == pymnt_chosen)]
+    dfg_fltrd = dfg_fltrd.groupby(["Customer State"])[['Sales']].sum()
+    dfg_fltrd.reset_index(inplace=True)
+    fig = px.choropleth(dfg_fltrd, locations="Customer State",
+                        locationmode="USA-states", color="Sales",
+                        scope="usa")
     return fig
