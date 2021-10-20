@@ -22,7 +22,7 @@ layout = html.Div([
     html.H1('개별 품목의 거래정보', style={"textAlign": "center"}),
 
     html.Div([
-       html.Div([
+        html.Div([
             html.Pre(children="품목", style={"fontSize":"150%"}),
             dcc.Dropdown(
                 id='input-1',
