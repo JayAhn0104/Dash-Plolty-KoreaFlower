@@ -7,6 +7,34 @@ from app import app
 import plot_fn as pf
 import plotly.express as px
 
+def df_top(df, var, top_limit):
+    sorted_df = df.sort_values(by=var, ascending=False)
+    target_df = sorted_df[:top_limit]
+    target_other_df = pd.DataFrame(sorted_df[top_limit:].sum()).transpose()
+    out_df = pd.concat([target_df, target_other_df], axis=0)
+    out_df.rename({0:'Others'}, inplace=True)
+    return out_df
+
+
+def df_top_years(df, var, top_limit, others_drop=True):
+    df_list = []
+    for year in df.unstack().index:
+        year_df = df.xs(year)
+        df_list.append(df_top(year_df, var, top_limit)[var])
+    out_df = pd.concat(df_list, axis=1)
+    out_df.set_axis(df.unstack().index, axis=1, inplace=True)
+    if others_drop: out_df.drop('Others', axis=0, inplace=True)
+    return out_df
+
+
+def df_top_reduce(df, top_list):
+    top_df = df[df['pumName'].isin(top_list)]
+    other_df = df[df['pumName'].isin(top_list)].groupby('Year').sum()
+    other_df['pumName'] = 'others'
+    other_df['Year'] = other_df.index
+
+    return pd.concat([top_df, other_df], axis=0)
+
 # get relative data folder
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
@@ -58,7 +86,7 @@ layout = html.Div([
      Input(component_id='input-top-limit', component_property='value')]
 )
 def update_graph(var, top_limit):
-    top_list = pf.df_top_years(year_pum_df, var, top_limit, others_drop=False).index
-    fin_df = pf.df_top_reduce(year_pum_df, top_list)
+    top_list = df_top_years(year_pum_df, var, top_limit, others_drop=False).index
+    fin_df = df_top_reduce(year_pum_df, top_list)
     fig = px.bar(fin_df.sort_values(by=var, ascending=False), x='Year', y=var, color='pumName')
     return fig
