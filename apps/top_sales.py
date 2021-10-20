@@ -21,7 +21,7 @@ for year in year_pum_df.unstack().index:
     year_pum_df.loc[year, 'pumName'] = year_pum_df.loc[year].index
 
 layout = html.Div([
-    html.H1('top sales', style={"textAlign": "center"}),
+    html.H1('Top sales', style={"textAlign": "center"}),
 
     html.Div([
 
@@ -34,7 +34,7 @@ layout = html.Div([
                 clearable=False,
                 persistence=True, persistence_type='session'
             )
-        ], className='five columns'),
+        ], className='six columns'),
 
         html.Div([
             html.Pre(children="Top limit", style={"fontSize": "150%"}),
@@ -45,7 +45,7 @@ layout = html.Div([
                 marks={i: 'Top {}'.format(i) for i in range(5, 31, 5)},
                 value=20
             )
-        ], style={'width': '35%', 'display': 'inline-block'})
+        ], className='six columns')
 
     ]),
 
