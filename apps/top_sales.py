@@ -63,7 +63,7 @@ layout = html.Div([
                 clearable=False,
                 persistence=True, persistence_type='session'
             )
-        ], className='six columns'),
+        ], style={'width': '35%', 'display': 'inline-block'}),
 
         html.Div([
             html.Pre(children="top-limit", style={"fontSize": "150%"}),
