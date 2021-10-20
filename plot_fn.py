@@ -2,6 +2,29 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pandas as pd
 
+
+def bar_line_fn(target_df, time_unit):
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(
+        go.Bar(x=target_df[time_unit], y=target_df['totQty'], name="totQty"),
+        secondary_y=False
+    )
+    fig.add_trace(
+        go.Scatter(x=target_df[time_unit], y=target_df['avgAmt'], name="avgAmt",
+                   mode='lines'),
+        secondary_y=True
+    )
+    fig.update_layout(
+        title_text='totQty & avgAmt from {} to {}'.format(target_df[time_unit].iloc[0],
+                                                          target_df[time_unit].iloc[-1])
+    )
+    fig.update_xaxes(title_text=time_unit)
+    fig.update_yaxes(title_text="<b>totQty</b>", secondary_y=False)
+    fig.update_yaxes(title_text="<b>avgAmt</b>", secondary_y=True)
+
+    return fig
+
+
 class target_fn:
     def __init__(self, df, name, time_unit, year):
         self.df = df
