@@ -66,5 +66,6 @@ layout = html.Div([
 def update_graph(var, top_limit):
     top_list = pf.df_top_years(year_pum_df, var, top_limit, others_drop=False).index
     fin_df = pf.df_top_reduce(year_pum_df, top_list)
-    fig = px.bar(fin_df.sort_values(by=var, ascending=False), x='Year', y=var, color='pumName')
+    fig = px.bar(fin_df.sort_values(by=var, ascending=False), x='Year', y=var, color='pumName',
+                 title='Top {} 품목들'.format(top_limit))
     return fig
