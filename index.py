@@ -26,11 +26,11 @@ app.layout = html.Div([
 def display_page(pathname):
     if pathname == '/apps/vgames':
         return vgames.layout
-    if pathname == '/apps/global_sales':
+    elif pathname == '/apps/global_sales':
         return global_sales.layout
-    if pathname == '/apps/market':
+    elif pathname == '/apps/market':
         return market.layout
-    if pathname == '/apps/one_product':
+    elif pathname == '/apps/one_product':
         return one_product.layout
     else:
         return one_product.layout
