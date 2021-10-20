@@ -41,11 +41,11 @@ layout = html.Div([
         )
     ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'}),
 
-    html.H2('전체 시장 년도별 비교 by ', style={"textAlign": "center"}),
+    html.H3('전체 시장 년도별 비교 by 월별 합계', style={"textAlign": "left"}),
 
     html.Div([
         html.Div([
-            html.Pre(children="변", style={"fontSize": "150%"}),
+            html.Pre(children="변수", style={"fontSize": "150%"}),
             dcc.Dropdown(
                 id='input-var',
                 options=[{'label': i, 'value': i} for i in ['totQty', 'avgAmt']],
