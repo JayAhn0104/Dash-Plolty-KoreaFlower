@@ -7,14 +7,14 @@ from app import app
 from app import server
 
 # Connect to your app pages
-from apps import vgames, global_sales, one_product
+from apps import vgames, global_sales, one_product, market
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div([
         dcc.Link('Video Games|', href='/apps/vgames'),
         dcc.Link('Other Products|', href='/apps/global_sales'),
-        # dcc.Link('전체 시장|', href='/apps/market'),
+        dcc.Link('전체 시장|', href='/apps/market'),
         dcc.Link('개별 품목', href='/apps/one_product')
     ], className="row"),
     html.Div(id='page-content', children=[])
@@ -28,8 +28,8 @@ def display_page(pathname):
         return vgames.layout
     if pathname == '/apps/global_sales':
         return global_sales.layout
-    # if pathname == '/apps/market':
-    #     return market.layout
+    if pathname == '/apps/market':
+        return market.layout
     if pathname == '/apps/one_product':
         return one_product.layout
     else:

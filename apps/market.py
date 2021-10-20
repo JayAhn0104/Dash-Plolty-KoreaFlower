@@ -49,3 +49,5 @@ def update_graph(time_unit):
     return fig
 
 
+if __name__ == '__main__':
+    app.run_server(debug=True)
