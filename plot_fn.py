@@ -3,6 +3,35 @@ import plotly.graph_objects as go
 import pandas as pd
 
 
+def df_top(df, var, top_limit):
+    sorted_df = df.sort_values(by=var, ascending=False)
+    target_df = sorted_df[:top_limit]
+    target_other_df = pd.DataFrame(sorted_df[top_limit:].sum()).transpose()
+    out_df = pd.concat([target_df, target_other_df], axis=0)
+    out_df.rename({0:'Others'}, inplace=True)
+    return out_df
+
+
+def df_top_years(df, var, top_limit, others_drop=True):
+    df_list = []
+    for year in df.unstack().index:
+        year_df = df.xs(year)
+        df_list.append(df_top(year_df, var, top_limit)[var])
+    out_df = pd.concat(df_list, axis=1)
+    out_df.set_axis(df.unstack().index, axis=1, inplace=True)
+    if others_drop: out_df.drop('Others', axis=0, inplace=True)
+    return out_df
+
+
+def df_top_reduce(df, top_list):
+    top_df = df[df['pumName'].isin(top_list)]
+    other_df = df[df['pumName'].isin(top_list)].groupby('Year').sum()
+    other_df['pumName'] = 'others'
+    other_df['Year'] = other_df.index
+
+    return pd.concat([top_df, other_df], axis=0)
+
+
 def bar_line_fn(target_df, time_unit):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(
