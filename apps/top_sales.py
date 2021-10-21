@@ -103,7 +103,7 @@ layout = html.Div([
                 marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
                 value=10
             )
-        ], className='six columns'),
+        ], className='five columns'),
 
         html.Div([
             html.Pre(children="Others 포함여부", style={"fontSize": "150%"}),
@@ -113,7 +113,7 @@ layout = html.Div([
                 value=logic_value[0],
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )
-        ], className='six columns')
+        ], className='five columns')
 
     ]),
 
