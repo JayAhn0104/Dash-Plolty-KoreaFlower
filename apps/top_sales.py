@@ -20,6 +20,9 @@ for year in year_pum_df.unstack().index:
     year_pum_df.loc[year, 'Year'] = str(year)
     year_pum_df.loc[year, 'pumName'] = year_pum_df.loc[year].index
 
+logic_label = ['O', 'X']
+logic_value = [True, False]
+
 layout = html.Div([
     html.H1('Top sales', style={"textAlign": "center"}),
 
@@ -45,7 +48,17 @@ layout = html.Div([
                 marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
                 value=10
             )
-        ], className='six columns')
+        ], className='six columns'),
+
+        html.Div([
+            html.Pre(children="Others 포함여부", style={"fontSize": "150%"}),
+            dcc.RadioItems(
+                id='input-logic',
+                options=[{'label': logic_label[i], 'value': logic_value[i]} for i in range(len(logic_label)) ],
+                value=logic_value[0],
+                labelStyle={'display': 'inline-block', 'marginTop': '5px'}
+            )
+        ], style={'width': '35%', 'display': 'inline-block'})
 
     ]),
 
@@ -61,10 +74,11 @@ layout = html.Div([
 @app.callback(
     Output(component_id='out-fig-top-bar', component_property='figure'),
     [Input(component_id='input-var', component_property='value'),
-     Input(component_id='input-top-limit', component_property='value')]
+     Input(component_id='input-top-limit', component_property='value'),
+     Input(component_id='input-logic', component_property='value')]
 )
-def update_graph(var, top_limit):
-    top_list = pf.df_top_years(year_pum_df, var, top_limit, others_drop=False).index
+def update_graph(var, top_limit, logic):
+    top_list = pf.df_top_years(year_pum_df, var, top_limit, others_drop=logic).index
     fin_df = pf.df_top_reduce(year_pum_df, top_list)
     fig = px.bar(fin_df.sort_values(by=var, ascending=False), x='Year', y=var, color='pumName',
                  title='Top {} {} 품목들'.format(top_limit, var))
