@@ -68,6 +68,62 @@ layout = html.Div([
         )
     ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'}),
 
+
+
+    html.Div([
+
+        html.Div([
+            html.Pre(children="년", style={"fontSize": "150%"}),
+            dcc.Dropdown(
+                id='input-year',
+                options=[{'label': i, 'value': i} for i in df['saleYear'].unique()],
+                value=df['saleYear'].unique()[-1],
+                clearable=False,
+                persistence=True, persistence_type='session'
+            )
+        ], className='six columns'),
+
+        html.Div([
+            html.Pre(children="변수", style={"fontSize": "150%"}),
+            dcc.Dropdown(
+                id='input-year-var',
+                options=[{'label': i, 'value': i} for i in ['totQty', 'avgAmt']],
+                value='totQty',
+                clearable=False,
+                persistence=True, persistence_type='session'
+            )
+        ], className='six columns'),
+
+        html.Div([
+            html.Pre(children="Top limit", style={"fontSize": "150%"}),
+            dcc.Slider(
+                id='input-year-top-limit',
+                min=5,
+                max=30,
+                marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
+                value=10
+            )
+        ], className='six columns'),
+
+        html.Div([
+            html.Pre(children="Others 포함여부", style={"fontSize": "150%"}),
+            dcc.RadioItems(
+                id='input-year-logic',
+                options=[{'label': logic_label[i], 'value': logic_value[i]} for i in range(len(logic_label)) ],
+                value=logic_value[0],
+                labelStyle={'display': 'inline-block', 'marginTop': '5px'}
+            )
+        ], style={'width': '35%', 'display': 'inline-block'})
+
+    ]),
+
+    html.Div([
+        dcc.Graph(
+            id='out-fig-year-pie'
+        )
+    ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'})
+
+
 ])
 
 
@@ -82,4 +138,17 @@ def update_graph(var, top_limit, logic):
     fin_df = pf.df_top_reduce(year_pum_df, top_list, logic)
     fig = px.bar(fin_df.sort_values(by=var, ascending=False), x='Year', y=var, color='pumName',
                  title='Top {} {} 품목들'.format(top_limit, var))
+    return fig
+
+
+@app.callback(
+    Output(component_id='out-fig-year-pie', component_property='figure'),
+    [Input(component_id='input-year', component_property='value'),
+     Input(component_id='input-year-var', component_property='value'),
+     Input(component_id='input-year-top-limit', component_property='value'),
+     Input(component_id='input-year-logic', component_property='value')]
+)
+def update_graph(year, var, top_limit, logic):
+    top_df = pf.df_top(year_pum_df.xs(year), var, top_limit)
+    fig = px.pie(top_df, values=var, names=top_df.index, title='{} of {}'.format(var, year))
     return fig
