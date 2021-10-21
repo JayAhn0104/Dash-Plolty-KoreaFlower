@@ -108,7 +108,10 @@ layout = html.Div([
                 options=[{'label': logic_label[i], 'value': logic_value[i]} for i in range(len(logic_label)) ],
                 value=logic_value[0],
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
-            ),
+            )
+        ], style={'width':'49%', 'display':'inline-block'}),
+
+        html.Div([
             html.Pre(children="Top limit", style={"fontSize": "150%"}),
             dcc.Slider(
                 id='input-year-top-limit',
@@ -117,18 +120,7 @@ layout = html.Div([
                 marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
                 value=10
             )
-        ], style={'width':'99%', 'display':'inline-block'}),
-
-        # html.Div([
-        #     html.Pre(children="Top limit", style={"fontSize": "150%"}),
-        #     dcc.Slider(
-        #         id='input-year-top-limit',
-        #         min=5,
-        #         max=30,
-        #         marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
-        #         value=10
-        #     )
-        # ], className='six columns')
+        ], style={'width':'49%', 'display':'inline-block'})
 
     ]),
 
