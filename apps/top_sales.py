@@ -175,6 +175,6 @@ def update_graph(year, var, top_limit, logic):
      Input(component_id='input-year-logic', component_property='value')]
 )
 def update_graph(year, var, top_limit, logic):
-    top_df = pf.month_top_df(year, var, top_limit, logic)
+    top_df = pf.month_top_df(month_pum_df, year, var, top_limit, logic)
     fig = px.bar(top_df.sort_values(by=var, ascending=False), x='Month', y=var, color='pumName', title='{} of {} by month'.format(var, year))
     return fig
