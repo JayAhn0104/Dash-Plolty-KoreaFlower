@@ -25,13 +25,13 @@ def df_top_years(df, var, top_limit):
 
 def df_top_reduce(df, top_list, with_others):
     if with_others:
-        out_df = df[df['pumName'].isin(top_list)]
-    else:
         top_df = df[df['pumName'].isin(top_list)]
         other_df = df[df['pumName'].isin(top_list)].groupby('Year').sum()
         other_df['pumName'] = 'others'
         other_df['Year'] = other_df.index
         out_df = pd.concat([top_df, other_df], axis=0)
+    else:
+        out_df = df[df['pumName'].isin(top_list)]
     return out_df
 
 
