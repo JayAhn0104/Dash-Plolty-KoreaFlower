@@ -80,7 +80,7 @@ layout = html.Div([
     html.Div([
 
         html.Div([
-            html.Pre(children="년", style={"fontSize": "150%"}),
+            html.Pre(children="년도", style={"fontSize": "150%"}),
             dcc.Dropdown(
                 id='input-year',
                 options=[{'label': i, 'value': i} for i in df['saleYear'].unique()],
@@ -117,7 +117,7 @@ layout = html.Div([
                 marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
                 value=10
             )
-        ], className='six columns'),
+        ], className='nine columns'),
 
         # html.Div([
         #     html.Pre(children="Top limit", style={"fontSize": "150%"}),
