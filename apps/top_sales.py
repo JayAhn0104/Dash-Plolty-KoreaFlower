@@ -117,7 +117,7 @@ layout = html.Div([
                 marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
                 value=10
             )
-        ], className='nine columns'),
+        ], style={'width':'99%', 'display':'inline-block'}),
 
         # html.Div([
         #     html.Pre(children="Top limit", style={"fontSize": "150%"}),
