@@ -113,7 +113,7 @@ layout = html.Div([
                 value=logic_value[0],
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )
-        ], style={'width': '35%', 'display': 'inline-block'})
+        ], className='six columns')
 
     ]),
 
@@ -149,6 +149,6 @@ def update_graph(var, top_limit, logic):
      Input(component_id='input-year-logic', component_property='value')]
 )
 def update_graph(year, var, top_limit, logic):
-    top_df = pf.df_top(year_pum_df.xs(year), var, top_limit)
+    top_df = pf.df_top_others(year_pum_df.xs(year), var, top_limit, logic)
     fig = px.pie(top_df, values=var, names=top_df.index, title='{} of {}'.format(var, year))
     return fig

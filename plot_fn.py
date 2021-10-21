@@ -3,6 +3,18 @@ import plotly.graph_objects as go
 import pandas as pd
 
 
+def df_top_others(df, var, top_limit, with_others):
+    sorted_df = df.sort_values(by=var, ascending=False)
+    target_df = sorted_df[:top_limit]
+    if with_others:
+        target_other_df = pd.DataFrame(sorted_df[top_limit:].sum()).transpose()
+        out_df = pd.concat([target_df, target_other_df], axis=0)
+        out_df.rename({0:'Others'}, inplace=True)
+    else:
+        out_df = target_df
+    return out_df
+
+
 def df_top(df, var, top_limit):
     sorted_df = df.sort_values(by=var, ascending=False)
     target_df = sorted_df[:top_limit]
