@@ -12,24 +12,27 @@ def df_top(df, var, top_limit):
     return out_df
 
 
-def df_top_years(df, var, top_limit, others_drop=True):
+def df_top_years(df, var, top_limit):
     df_list = []
     for year in df.unstack().index:
         year_df = df.xs(year)
         df_list.append(df_top(year_df, var, top_limit)[var])
     out_df = pd.concat(df_list, axis=1)
     out_df.set_axis(df.unstack().index, axis=1, inplace=True)
-    if others_drop: out_df.drop('Others', axis=0, inplace=True)
+    out_df.drop('Others', axis=0, inplace=True)
     return out_df
 
 
-def df_top_reduce(df, top_list):
-    top_df = df[df['pumName'].isin(top_list)]
-    other_df = df[df['pumName'].isin(top_list)].groupby('Year').sum()
-    other_df['pumName'] = 'others'
-    other_df['Year'] = other_df.index
-
-    return pd.concat([top_df, other_df], axis=0)
+def df_top_reduce(df, top_list, with_others):
+    if with_others:
+        out_df = df[df['pumName'].isin(top_list)]
+    else:
+        top_df = df[df['pumName'].isin(top_list)]
+        other_df = df[df['pumName'].isin(top_list)].groupby('Year').sum()
+        other_df['pumName'] = 'others'
+        other_df['Year'] = other_df.index
+        out_df = pd.concat([top_df, other_df], axis=0)
+    return out_df
 
 
 def bar_line_fn(target_df, time_unit):

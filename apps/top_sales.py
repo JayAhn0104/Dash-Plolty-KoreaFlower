@@ -78,8 +78,8 @@ layout = html.Div([
      Input(component_id='input-logic', component_property='value')]
 )
 def update_graph(var, top_limit, logic):
-    top_list = pf.df_top_years(year_pum_df, var, top_limit, others_drop=logic).index
-    fin_df = pf.df_top_reduce(year_pum_df, top_list)
+    top_list = pf.df_top_years(year_pum_df, var, top_limit).index
+    fin_df = pf.df_top_reduce(year_pum_df, top_list, logic)
     fig = px.bar(fin_df.sort_values(by=var, ascending=False), x='Year', y=var, color='pumName',
                  title='Top {} {} 품목들'.format(top_limit, var))
     return fig
