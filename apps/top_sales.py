@@ -31,7 +31,9 @@ logic_label = ['O', 'X']
 logic_value = [True, False]
 
 layout = html.Div([
-    html.H1('Top sales', style={"textAlign": "center"}),
+    html.H1('Top Sales', style={"textAlign": "center"}),
+
+    html.H3('Top Sales for 전체기간', style={"textAlign": "left"}),
 
     html.Div([
 
@@ -76,7 +78,7 @@ layout = html.Div([
     ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'}),
 
 
-
+    html.H3('Top Sales for 특정 년도', style={"textAlign": "left"}),
     html.Div([
 
         html.Div([
@@ -118,17 +120,6 @@ layout = html.Div([
                 labelStyle={'display': 'inline-block', 'marginTop': '5px'}
             )
         ], style={'width':'99%', 'display':'inline-block'}),
-
-        # html.Div([
-        #     html.Pre(children="Top limit", style={"fontSize": "150%"}),
-        #     dcc.Slider(
-        #         id='input-year-top-limit',
-        #         min=5,
-        #         max=30,
-        #         marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
-        #         value=10
-        #     )
-        # ], className='six columns')
 
     ]),
 
