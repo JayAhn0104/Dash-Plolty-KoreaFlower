@@ -3,6 +3,19 @@ import plotly.graph_objects as go
 import pandas as pd
 
 
+def month_top_df(df, year, var, top_limit, with_others):
+    year_df = df.loc[year]
+    bar_top = df_top_years(year_df, var, top_limit)
+    top_df = year_df[year_df['pumName'].isin(bar_top.index)]
+    if with_others:
+        other_df = year_df[year_df['pumName'].isin(bar_top.index)].groupby('Month').sum()
+        other_df['pumName'] = 'others'
+        other_df['Month'] = other_df.index
+        out_df = pd.concat([top_df, other_df], axis=0)
+    else:
+        out_df = top_df
+    return out_df
+
 def df_top_others(df, var, top_limit, with_others):
     sorted_df = df.sort_values(by=var, ascending=False)
     target_df = sorted_df[:top_limit]

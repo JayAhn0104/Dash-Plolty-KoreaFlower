@@ -20,6 +20,13 @@ for year in year_pum_df.unstack().index:
     year_pum_df.loc[year, 'Year'] = str(year)
     year_pum_df.loc[year, 'pumName'] = year_pum_df.loc[year].index
 
+month_pum_df = df.groupby(['saleYear','saleMonth','pumName'])[['totAmt','totQty','avgAmt']].sum()
+month_pum_df['pumName'], month_pum_df['Month'] = None, None
+for year in month_pum_df.unstack().unstack().index:
+    for month in month_pum_df.loc[year].unstack().index:
+        month_pum_df.loc[(year, month), 'Month'] = str(month)
+        month_pum_df.loc[(year, month), 'pumName'] = month_pum_df.loc[(year, month)].index
+
 logic_label = ['O', 'X']
 logic_value = [True, False]
 
@@ -103,7 +110,7 @@ layout = html.Div([
                 marks={i: 'Top{}'.format(i) for i in range(5, 31, 5)},
                 value=10
             )
-        ], className='five columns'),
+        ], className='six columns'),
 
         html.Div([
             html.Pre(children="Others 포함여부", style={"fontSize": "150%"}),
@@ -120,6 +127,12 @@ layout = html.Div([
     html.Div([
         dcc.Graph(
             id='out-fig-year-pie'
+        )
+    ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'}),
+
+    html.Div([
+        dcc.Graph(
+            id='out-fig-year-bar'
         )
     ], style={'width': '99%', 'display': 'inline-block', 'padding': '0 20'})
 
@@ -151,4 +164,17 @@ def update_graph(var, top_limit, logic):
 def update_graph(year, var, top_limit, logic):
     top_df = pf.df_top_others(year_pum_df.xs(year), var, top_limit, logic)
     fig = px.pie(top_df, values=var, names=top_df.index, title='{} of {}'.format(var, year))
+    return fig
+
+
+@app.callback(
+    Output(component_id='out-fig-year-bar', component_property='figure'),
+    [Input(component_id='input-year', component_property='value'),
+     Input(component_id='input-year-var', component_property='value'),
+     Input(component_id='input-year-top-limit', component_property='value'),
+     Input(component_id='input-year-logic', component_property='value')]
+)
+def update_graph(year, var, top_limit, logic):
+    top_df = pf.month_top_df(year, var, top_limit, logic)
+    fig = px.bar(top_df.sort_values(by=var, ascending=False), x='Month', y=var, color='pumName', title='{} of {} by month'.format(var, year))
     return fig
