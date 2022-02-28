@@ -7,7 +7,7 @@ from app import app
 from app import server
 
 # Connect to your app pages
-from apps import global_sales, one_product, market, top_sales
+from apps import one_product, market, top_sales
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
