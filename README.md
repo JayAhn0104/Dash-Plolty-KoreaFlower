@@ -1,9 +1,7 @@
 # Dash - 한국 화훼 공판장 경매 정보 대쉬보드
 
----
-
 ## Project Description
-이 프로젝트는 [Dash](https://plotly.com/dash/) 를 이용해 한국의 화훼 도매시장의 경매 정보를 
+이 프로젝트는 [Dash](https://plotly.com/dash/) 를 이용해 한국의 화훼 공판장 경매 정보를 
 interactive한 대쉬보드로 시각화하고 그 결과를 [Heroku](https://www.heroku.com) 를 사용해 
 웹페이지로 구현합니다.
 
