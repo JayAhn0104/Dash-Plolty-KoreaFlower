@@ -22,7 +22,7 @@ interactive한 대쉬보드로 시각화하고 그 결과를 [Heroku](https://ww
 
 | 전체시장                                                                                                                                | Top_Sale                                                                                                                                | 개별품목                                                                                                                                |
 |-----------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| <center><img alt="screen_shot" src='https://drive.google.com/uc?export=view&id=1WOW25FndVx3gjzvkAiAMeGypi7EliaCN' width = 300></center> | <center><img alt="screen_shot" src='https://drive.google.com/uc?export=view&id=1WSev0pK5Z3XrbDY8WNUBCa9WhahFDKTr' width = 300></center> | <center><img alt="screen_shot" src='https://drive.google.com/uc?export=view&id=12yBDugdXtMMMhfb05ooZxt5SRnARu6iT' width = 300></center> |
+| <center><img alt="screen_shot" src='https://drive.google.com/uc?export=view&id=1WOW25FndVx3gjzvkAiAMeGypi7EliaCN' width = 300></center> | <center><img alt="screen_shot" src='https://drive.google.com/uc?export=view&id=1WSev0pK5Z3XrbDY8WNUBCa9WhahFDKTr' width = 300></center> | <center><img alt="screen_shot" src='https://drive.google.com/uc?export=view&id=1jcoUMFBnl9j560XckLfrBANnaFwexTPD' width = 300></center> |
 
 <br>
 
