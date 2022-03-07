@@ -11,6 +11,17 @@ interactive한 대쉬보드로 시각화하고 그 결과를 [Heroku](https://ww
 
 - Data 수집: [Flower_DataCollect.ipynb](https://github.com/JayAhn0104/Dash_Plolty/blob/master/Flower_DataCollect.ipynb)
 
+## Dashboard Overview
+대쉬보드 웹사이트는 총 3페이지로 분리되어 있습니다. 
+1. 전체 시장
+   - 시장 전체의 거래량 및 평균 거래금액 요약
+2. Top Sales
+   - 년도별/월별 거래량 및 평균 거래금액 기준 상위 일부 품목들에 대한 정보
+3. 개별 품목
+   - 개별 품목에 대한 거래량 및 평균 거래금액
+   
+![](images/screen_shot.png)
+
 ## Dashboard Website
 [korea-flower](https://korea-flower.herokuapp.com)
 
