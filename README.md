@@ -9,6 +9,8 @@ interactive한 대쉬보드로 시각화하고 그 결과를 [Heroku](https://ww
 시각화에 사용한 데이터는 [화훼유통정보시스템](https://flower.at.or.kr/) 에서 제공하는 공공데이터로
 2017년 1월부터 2021년까지 12월까지 수집된 'at양재'에서 거래된 품목/품종별 경매 정보 입니다.
 
+- Data 수집: [Flower_DataCollect.ipynb](https://github.com/JayAhn0104/Dash_Plolty/blob/master/Flower_DataCollect.ipynb)
+
 ## Dashboard Website
 [korea-flower](https://korea-flower.herokuapp.com)
 
