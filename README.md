@@ -19,8 +19,12 @@ interactive한 대쉬보드로 시각화하고 그 결과를 [Heroku](https://ww
    - 년도별/월별 거래량 및 평균 거래금액 기준 상위 일부 품목들에 대한 정보
 3. 개별 품목
    - 개별 품목에 대한 거래량 및 평균 거래금액
-   
-![](images/screen_shot.png)
+
+| 전체시장                                                                                                                                | Top_Sale                                                                                                                                | 개별품목                                                                                                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| <center><img alt="screen_shot" src='https://drive.google.com/uc?export=view&id=1WOW25FndVx3gjzvkAiAMeGypi7EliaCN' width = 400></center> | <center><img alt="screen_shot" src='https://drive.google.com/uc?export=view&id=1WSev0pK5Z3XrbDY8WNUBCa9WhahFDKTr' width = 400></center> | <center><img alt="screen_shot" src='https://drive.google.com/uc?export=view&id=12yBDugdXtMMMhfb05ooZxt5SRnARu6iT' width = 400></center> |
+
+<br>
 
 ## Dashboard Website
 [korea-flower](https://korea-flower.herokuapp.com)
