@@ -2,8 +2,7 @@
 
 ## Project Description
 이 프로젝트는 [Dash](https://plotly.com/dash/) 를 이용해 한국의 화훼 공판장 경매 정보를 
-interactive한 대쉬보드로 시각화하고 그 결과를 [Heroku](https://www.heroku.com) 를 사용해 
-웹페이지로 구현합니다.
+interactive한 대쉬보드로 시각화하고 그 결과를 [Heroku](https://www.heroku.com) 를  웹페이지로 구현합니다.
 
 ## Data
 시각화에 사용한 데이터는 [화훼유통정보시스템](https://flower.at.or.kr/) 에서 제공하는 공공데이터로
@@ -27,7 +26,7 @@ interactive한 대쉬보드로 시각화하고 그 결과를 [Heroku](https://ww
 
 
 ## Dashboard Website
-위의 링크를 통해 완성된 대쉬보드를 제공하는 웹사이트로 접속할 수 있습니다. 
+아래 링크를 통해 완성된 대쉬보드를 제공하는 웹사이트로 접속할 수 있습니다. 
 
 [korea-flower](https://korea-flower.herokuapp.com)
 
