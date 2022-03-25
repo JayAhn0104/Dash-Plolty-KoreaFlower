@@ -28,7 +28,7 @@ interactive한 대쉬보드로 시각화하고 그 결과를 [Heroku](https://ww
 ## Dashboard Website
 아래 링크를 통해 완성된 대쉬보드를 제공하는 웹사이트로 접속할 수 있습니다. 
 
-[korea-flower](https://korea-flower.herokuapp.com)
+[https://korea-flower.herokuapp.com/](https://korea-flower.herokuapp.com)
 
 
 
