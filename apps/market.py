@@ -45,10 +45,10 @@ layout = html.Div([
 
     html.Div([
         html.Div([
-            html.Pre(children="변수", style={"fontSize": "150%"}),
+            html.Pre(children="지표", style={"fontSize": "150%"}),
             dcc.Dropdown(
                 id='input-var',
-                options=[{'label': i, 'value': i} for i in ['totQty', 'avgAmt']],
+                options=[{'label': i, 'value': j} for i, j in zip(['거래량', '평균가격'], ['totQty', 'avgAmt'])],
                 value='totQty',
                 clearable=False,
                 persistence=True, persistence_type='session'
@@ -80,4 +80,12 @@ def update_graph(time_unit):
 )
 def update_graph_2(var):
     fig = px.line(year_month_df, x='saleMonth', y=var, color='saleYear')
+    fig.update_xaxes(title_text='월')
+    fig.update_layout(legend_title_text="년도")
+    if var == 'totQty':
+        fig.update_yaxes(title_text='거래량')
+    elif var == 'avgAmt':
+        fig.update_yaxes(title_text='평균가격')
+    else:
+        pass
     return fig

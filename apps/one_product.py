@@ -19,11 +19,11 @@ time_list_en = ['saleDate', 'Year_Month', 'saleMonth']
 time_list_kr = ['일자별', '월별', '월별 합계']
 
 layout = html.Div([
-    html.H1('개별 품목의 거래정보', style={"textAlign": "center"}),
+    html.H1('개별 품종의 거래정보', style={"textAlign": "center"}),
 
     html.Div([
         html.Div([
-            html.Pre(children="품목", style={"fontSize":"150%"}),
+            html.Pre(children="품종", style={"fontSize":"150%"}),
             dcc.Dropdown(
                 id='input-1',
                 options=[{'label': i, 'value': i} for i in pum_list],

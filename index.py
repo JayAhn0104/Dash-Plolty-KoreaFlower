@@ -13,8 +13,8 @@ app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div([
         dcc.Link('전체 시장|', href='/apps/market'),
-        dcc.Link('Top Sales|', href='/apps/top_sales'),
-        dcc.Link('개별 품목', href='/apps/one_product')
+        dcc.Link('상위 거래 품종|', href='/apps/top_sales'),
+        dcc.Link('개별 품종', href='/apps/one_product')
     ], className="row"),
     html.Div(id='page-content', children=[])
 ])
