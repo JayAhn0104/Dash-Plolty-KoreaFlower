@@ -152,7 +152,6 @@ def update_graph(var, top_limit, logic):
                  title='Top {} {} 품목들'.format(top_limit, var))
     return fig
 
-
 @app.callback(
     Output(component_id='out-fig-year-pie', component_property='figure'),
     [Input(component_id='input-year', component_property='value'),

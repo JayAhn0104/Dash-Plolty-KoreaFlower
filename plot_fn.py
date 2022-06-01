@@ -72,12 +72,12 @@ def bar_line_fn(target_df, time_unit):
         secondary_y=True
     )
     fig.update_layout(
-        title_text='totQty & avgAmt from {} to {}'.format(target_df[time_unit].iloc[0],
+        title_text='거래량 & 평균가격 from {} to {}'.format(target_df[time_unit].iloc[0],
                                                           target_df[time_unit].iloc[-1])
     )
     fig.update_xaxes(title_text=time_unit)
-    fig.update_yaxes(title_text="<b>totQty</b>", secondary_y=False)
-    fig.update_yaxes(title_text="<b>avgAmt</b>", secondary_y=True)
+    fig.update_yaxes(title_text="<b>거래량</b>", secondary_y=False)
+    fig.update_yaxes(title_text="<b>평균가격</b>", secondary_y=True)
 
     return fig
 
